@@ -16,7 +16,11 @@
         return nil;
     }
     
+#if __has_feature(objc_arc)
     CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)data, NULL);
+#else
+    CGImageSourceRef source = CGImageSourceCreateWithData((CFDataRef)data, NULL);
+#endif
     
     size_t count = CGImageSourceGetCount(source);
     NSMutableArray* images = [NSMutableArray array];
